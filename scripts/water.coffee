@@ -6,14 +6,15 @@
 #
 gpio = require 'pi-gpio'
 PIN = 11
+DEFAULT_SECONDS = 10
 
 module.exports = (robot)->
   busy = no
-  robot.respond /\s*water(?:\s+for\s+(\d+)\s*s(?:ec(?:onds)?)?)?\s*$/i, (msg)->
+  robot.respond /\s*water(?:\s+for\s+(\d+)\s*s(?:ec(?:onds?)?)?)?\s*$/i, (msg)->
     if busy
       msg.reply "Sorry, I'm busy :("
       return
-    sec = if msg.match[1] then parseInt(msg.match[1]) else 2
+    sec = if msg.match[1] then parseInt(msg.match[1]) else DEFAULT_SECONDS
     msg.reply "Watering for #{sec} sec. :droplet:"
     gpio.open PIN, 'output', (err)->
       busy = yes
