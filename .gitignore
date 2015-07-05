@@ -1,3 +1,4 @@
 node_modules
 .DS_Store*
-*.log
+.hubot_history
+/hubot.log
